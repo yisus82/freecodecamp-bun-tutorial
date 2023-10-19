@@ -2,10 +2,18 @@
   "name": "freecodecamp-bun-tutorial",
   "module": "index.ts",
   "type": "module",
+  "scripts": {
+    "start": "bun index.ts",
+    "dev": "bun --watch index.ts"
+  },
   "devDependencies": {
+    "@types/figlet": "^1.5.7",
     "bun-types": "latest"
   },
+  "dependencies": {
+    "figlet": "^1.6.0"
+  },
   "peerDependencies": {
-    "typescript": "^5.0.0"
+    "typescript": "^5.2.2"
   }
 }
