@@ -26,6 +26,10 @@ const server = Bun.serve({
       throw new Error('This is an error');
     }
 
+    if (url.pathname === '/greet') {
+      return new Response(Bun.file('./greet.txt'));
+    }
+
     return new Response('Not found', { status: 404 });
   },
   error(error) {
