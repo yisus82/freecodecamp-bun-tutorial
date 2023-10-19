@@ -2,7 +2,7 @@ import figlet from 'figlet';
 
 const server = Bun.serve({
   port: 3000,
-  fetch(request, _server) {
+  fetch(request) {
     const url = new URL(request.url);
 
     if (url.pathname === '/') {
@@ -22,7 +22,17 @@ const server = Bun.serve({
       return new Response('Contact us at bunisgreat@bun.com');
     }
 
+    if (url.pathname === '/error') {
+      throw new Error('This is an error');
+    }
+
     return new Response('Not found', { status: 404 });
+  },
+  error(error) {
+    return new Response(error.message, {
+      headers: { 'Content-Type': 'text/html' },
+      status: 500,
+    });
   },
 });
 
