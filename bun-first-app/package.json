@@ -1,5 +1,5 @@
 {
-  "name": "freecodecamp-bun-tutorial",
+  "name": "bun-first-app",
   "module": "index.ts",
   "type": "module",
   "scripts": {
