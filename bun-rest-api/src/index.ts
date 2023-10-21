@@ -1,6 +1,8 @@
 import { Elysia } from 'elysia';
+import { plugin } from './plugin';
 
 const app = new Elysia()
+  .use(plugin)
   .state({
     version: '1.0.0',
   })
@@ -20,6 +22,7 @@ const app = new Elysia()
     ],
     date: getDate().toDateString(),
     version: store.version,
+    pluginVersion: store['plugin-version'],
   }))
   .listen(3000);
 
