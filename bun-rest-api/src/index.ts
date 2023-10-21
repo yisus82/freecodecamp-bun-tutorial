@@ -1,4 +1,5 @@
-import { Elysia } from 'elysia';
+import { Elysia, t } from 'elysia';
+import { postBodyDTO, postResponseDTO } from './models';
 import { plugin } from './plugin';
 
 const app = new Elysia()
@@ -11,11 +12,20 @@ const app = new Elysia()
 
 app.group('/posts', app =>
   app
-    .get('/:id', ({ params: { id } }) => ({ id, title: `Learn Bun (Part ${id})` }))
-    .post('/', ({ body, set }) => {
-      set.status = 201;
-      return body;
+    .get('/:id', ({ params: { id } }) => ({ id, title: `Learn Bun (Part ${id})` }), {
+      params: t.Object({ id: t.Numeric() }),
     })
+    .post(
+      '/',
+      ({ body, set }) => {
+        set.status = 201;
+        return { ...body, id: Math.floor(Math.random() * 100) };
+      },
+      {
+        body: postBodyDTO,
+        response: postResponseDTO,
+      }
+    )
 );
 
 app.group('/tracks', app =>
